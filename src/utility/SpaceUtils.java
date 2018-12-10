@@ -1,4 +1,4 @@
-package utilities;
+package utility;
 
 import net.jini.core.transaction.server.TransactionManager;
 import java.rmi.RMISecurityManager;

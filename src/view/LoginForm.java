@@ -1,5 +1,8 @@
 package view;
 
+import controller.LoginController;
+import org.apache.commons.lang3.StringUtils;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,9 +16,11 @@ public class LoginForm extends JFrame
     private JPasswordField pf_password;
     private JButton btn_register;
     private JButton btn_login;
+    private LoginController controller;
 
     public LoginForm()
     {
+        controller = new LoginController(this);
         initializeComponents();
         startListeners();
     }
@@ -27,7 +32,18 @@ public class LoginForm extends JFrame
             @Override
             public void actionPerformed(ActionEvent actionEvent)
             {
-                tf_username.setText("Hello World");
+                controller.handleRegistrationButtonPress(
+                        tf_username.getText(), new String(pf_password.getPassword()));
+            }
+        });
+
+        btn_login.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                controller.handleLoginButtonPress(
+                        tf_username.getText(), new String(pf_password.getPassword()));
             }
         });
     }
@@ -37,7 +53,7 @@ public class LoginForm extends JFrame
         add(pnl_main);
 
         setTitle("Login/Register");
-        setSize(400, 250);
+        setSize(500, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
